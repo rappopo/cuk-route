@@ -1,0 +1,15 @@
+{
+  "name": "@rappopo/cuk-route",
+  "version": "0.0.1",
+  "description": "HTTP Router & stuffs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Ardhi Lukianto <ardhi@lukianto.com>",
+  "license": "MIT",
+  "dependencies": {
+    "koa-compose": "^4.1.0",
+    "koa-router": "^7.4.0"
+  }
+}
