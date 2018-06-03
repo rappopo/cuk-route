@@ -16,7 +16,7 @@ module.exports = function(cuk){
   pkg.lib.compose = require('koa-compose')
 
   return new Promise((resolve, reject) => {
-    _.each(helper.getPkgs(), p => {
+    _.each(helper('core:pkgs')(), p => {
       p.cuks[pkgId] = {}
       let opt = p.cfg.mount === '/' ? null : { prefix: p.cfg.mount }
       let router = new Router(opt)
