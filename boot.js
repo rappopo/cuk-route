@@ -27,6 +27,7 @@ module.exports = function(cuk){
       })
       if (files.length > 0) {
         let mws = makeMiddleware(_.get(p.cfg, 'cuks.route.middleware'))
+        mws.unshift(helper('http:middleware')('route:defMiddleware')())
         if (mws.length > 0) router.use(pkg.lib.compose(mws))
         _.each(files, f => {
           makeRoute(f, p, pkg, router, dir)
