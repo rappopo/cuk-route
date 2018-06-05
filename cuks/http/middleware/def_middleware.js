@@ -10,7 +10,16 @@ module.exports = function(cuk) {
         if (hostname.substr(0, 4) === 'www.')
           hostname = hostname.substr(4)
 
-        ctx.state.domain = 'test'
+        let skin = 'bootswatch'
+        if (!cuk.pkg[skin]) skin = 'view'
+
+        ctx.state.site = {
+          hostname: hostname,
+          skin: skin
+        }
+
+        ctx.state.site.theme = 'minty'
+
         return next()
       }
     }

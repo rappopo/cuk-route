@@ -16,6 +16,10 @@ module.exports = function(cuk){
   pkg.lib.compose = require('koa-compose')
 
   return new Promise((resolve, reject) => {
+    app
+      .use(helper('http:middleware')('route:catchAll')())
+      .use(helper('http:middleware')('route:defMiddleware')())
+
     _.each(helper('core:pkgs')(), p => {
       p.cuks[pkgId] = {}
       let opt = p.cfg.mount === '/' ? null : { prefix: p.cfg.mount }
@@ -27,7 +31,6 @@ module.exports = function(cuk){
       })
       if (files.length > 0) {
         let mws = makeMiddleware(_.get(p.cfg, 'cuks.route.middleware'))
-        mws.unshift(helper('http:middleware')('route:defMiddleware')())
         if (mws.length > 0) router.use(pkg.lib.compose(mws))
         _.each(files, f => {
           makeRoute(f, p, pkg, router, dir)
