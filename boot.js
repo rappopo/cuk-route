@@ -1,6 +1,7 @@
 'use strict'
 
 const Router = require('koa-router')
+const session = require('koa-session')
 
 module.exports = function(cuk){
   let pkgId = 'route',
@@ -8,13 +9,16 @@ module.exports = function(cuk){
   const { _, helper, path, fs, globby } = cuk.lib
   const app = cuk.pkg.http.lib.app
   const makeRoute = require('./lib/make_route')(cuk)
+  const makeDefHandler = require('./lib/make_def_handler')(cuk)
 
   pkg.trace('Initializing...')
 
   pkg.lib.Router = Router
 
   return new Promise((resolve, reject) => {
-    app.use(helper('http:composeMiddleware')('route:catchAll, route:defMiddleware', 'route:*'))
+    app.use(session(pkg.cfg.common.session, app))
+    app.use(makeDefHandler())
+    app.use(helper('http:composeMiddleware')('http:responseTime, route:defMiddleware', 'route:*'))
 
     _.each(helper('core:pkgs')(), p => {
       p.cuks[pkgId] = {}
