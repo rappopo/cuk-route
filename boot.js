@@ -7,22 +7,18 @@ module.exports = function(cuk){
     pkg = cuk.pkg[pkgId]
   const { _, helper, path, fs, globby } = cuk.lib
   const app = cuk.pkg.http.lib.app
-  const makeMiddleware = require('./lib/make_middleware')(cuk)
   const makeRoute = require('./lib/make_route')(cuk)
 
   pkg.trace('Initializing...')
 
   pkg.lib.Router = Router
-  pkg.lib.compose = require('koa-compose')
 
   return new Promise((resolve, reject) => {
-    app
-      .use(helper('http:middleware')('route:catchAll')())
-      .use(helper('http:middleware')('route:defMiddleware')())
+    app.use(helper('http:composeMiddleware')('route:catchAll, route:defMiddleware', 'route:*'))
 
     _.each(helper('core:pkgs')(), p => {
       p.cuks[pkgId] = {}
-      let opt = p.cfg.mount === '/' ? null : { prefix: p.cfg.mount }
+      let opt = p.cfg.common.mount === '/' ? null : { prefix: p.cfg.common.mount }
       let router = new Router(opt)
       let dir = path.join(p.dir, 'cuks', pkgId)
       if (!fs.existsSync(dir)) return
@@ -30,8 +26,7 @@ module.exports = function(cuk){
         ignore: [`${dir}/**/_*.js`]
       })
       if (files.length > 0) {
-        let mws = makeMiddleware(_.get(p.cfg, 'cuks.route.middleware'))
-        if (mws.length > 0) router.use(pkg.lib.compose(mws))
+        app.use(helper('http:composeMiddleware')(_.get(pkg.cfg, 'cuks.http.middleware', []), `route:${p.id}`))
         _.each(files, f => {
           makeRoute(f, p, pkg, router, dir)
         })

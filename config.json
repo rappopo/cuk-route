@@ -1,4 +1,6 @@
 {
-  "ext": ".html",
-  "trimIndex": false
+  "common": {
+    "ext": ".html",
+    "trimIndex": false
+  }
 }

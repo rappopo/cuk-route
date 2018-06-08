@@ -9,7 +9,6 @@
   "author": "Ardhi Lukianto <ardhi@lukianto.com>",
   "license": "MIT",
   "dependencies": {
-    "koa-compose": "^4.1.0",
     "koa-router": "^7.4.0"
   }
 }
