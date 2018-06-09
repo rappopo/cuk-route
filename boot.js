@@ -18,21 +18,18 @@ module.exports = function(cuk){
   return new Promise((resolve, reject) => {
     app.use(session(pkg.cfg.common.session, app))
     app.use(makeDefHandler())
-    app.use(helper('http:composeMiddleware')('http:responseTime, route:defMiddleware', 'route:*'))
+    app.use(helper('http:composeMiddleware')('http:responseTime, route:defMiddleware', `${pkgId}:*`))
 
-    _.each(helper('core:pkgs')(), p => {
-      p.cuks[pkgId] = {}
-      let opt = p.cfg.common.mount === '/' ? null : { prefix: p.cfg.common.mount }
-      let router = new Router(opt)
-      let dir = path.join(p.dir, 'cuks', pkgId)
-      if (!fs.existsSync(dir)) return
-      var files = globby.sync(`${dir}/**/*.js`, {
-        ignore: [`${dir}/**/_*.js`]
-      })
-      if (files.length > 0) {
-        app.use(helper('http:composeMiddleware')(_.get(pkg.cfg, 'cuks.http.middleware', []), `route:${p.id}`))
-        _.each(files, f => {
-          makeRoute(f, p, pkg, router, dir)
+    helper('core:bootDeep')({
+      pkgId: pkgId,
+      name: '',
+      rootAction: opts => {
+//        opts.pkg.cuks[pkgId] = {}
+        let opt = opts.pkg.cfg.common.mount === '/' ? null : { prefix: opts.pkg.cfg.common.mount }
+        let router = new Router(opt)
+          app.use(helper('http:composeMiddleware')(_.get(pkg.cfg, 'cuks.http.middleware', []), `${pkgId}:${opts.pkg.id}`))
+        _.each(opts.files, f => {
+          makeRoute(f, opts.pkg, pkg, router, opts.dir)
         })
         app
           .use(router.routes())
