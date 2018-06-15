@@ -14,7 +14,7 @@ module.exports = function(cuk) {
 
 ```javascript
 module.exports = function(cuk) {
-  return 'view:root:/my/view'
+  return 'view:app:/my/view'
 }
 ```
 
@@ -25,7 +25,7 @@ module.exports = function(cuk) {
   ...
   return {
     method: 'GET',
-    middleware: 'root:routeMiddleware',
+    middleware: 'app:routeMiddleware',
     path: '/my/custom/route/path',
     param: {
       routeParam: (routeParam, ctx, next) => {
@@ -36,7 +36,7 @@ module.exports = function(cuk) {
     },
     handler: async (ctx, next) => {
       ...
-      ctx.render('root:/my/view')
+      ctx.render('app:/my/view')
     }
   }
 }
@@ -49,7 +49,7 @@ module.exports = function(cuk) {
   ...
   return [{
     method: 'GET',
-    middleware: 'root:routeMiddleware',
+    middleware: 'app:routeMiddleware',
     path: '/my/custom/route/path',
     param: {
       routeParam: (routeParam, ctx, next) => {
@@ -60,7 +60,7 @@ module.exports = function(cuk) {
     },
     handler: async (ctx, next) => {
       ...
-      ctx.render('root:/my/view')
+      ctx.render('app:/my/view')
     }
   }, {
     ...
@@ -74,7 +74,7 @@ module.exports = function(cuk) {
 module.exports = function(cuk) {
   ...
   return {
-    middleware: 'root:globalMiddleware',
+    middleware: 'app:globalMiddleware',
     param: {
       globalParam: (globalParam, ctx, next) => {
         ...
@@ -85,7 +85,7 @@ module.exports = function(cuk) {
     route: [
       {
         method: 'GET',
-        middleware: 'root:routeMiddleware',
+        middleware: 'app:routeMiddleware',
         path: '/my/custom/route/path',
         param: {
           routeParam: (routeParam, ctx, next) => {
@@ -96,7 +96,7 @@ module.exports = function(cuk) {
         },
         handler: async (ctx, next) => {
           ...
-          ctx.render('root:/my/view')
+          ctx.render('app:/my/view')
         }
       },
       ...
