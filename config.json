@@ -1,6 +1,6 @@
 {
   "common": {
-    "ext": ".html",
+    "ext": "",
     "trimIndex": false,
     "session": {
       "key": "cuk:sess",
