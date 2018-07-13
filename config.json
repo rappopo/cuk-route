@@ -10,6 +10,17 @@
       "signed": true,
       "rolling": false,
       "renew": false
+    },
+    "sessionUseModel": true
+  },
+  "cuks": {
+    "model": {
+      "connector": {
+        "default": {
+          "dab": "@rappopo/dab-memory",
+          "opts": {}
+        }
+      }
     }
   }
 }
