@@ -18,7 +18,7 @@ module.exports = function(cuk){
   //    app.use(makeDefHandler())
       app.use(helper('http:composeMiddleware')('http:responseTime', `${pkgId}:*`))
 
-      helper('core:bootTrace')('%A Loading routes...', null)
+      helper('core:bootTrace')('|  |- Loading routes...')
       helper('core:bootDeep')({
         pkgId: pkgId,
         name: '',
