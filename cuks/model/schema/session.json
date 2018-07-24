@@ -1,7 +1,0 @@
-{
-  "srcAttribId": "key",
-  "attributes": {
-    "key": { "type": "string" },
-    "data": { "type": "string" }
-  }
-}

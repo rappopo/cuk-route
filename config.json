@@ -2,25 +2,9 @@
   "common": {
     "ext": "",
     "trimIndex": false,
-    "session": {
-      "key": "cuk:sess",
-      "maxAge": "24h",
-      "overwrite": true,
-      "httpOnly": true,
-      "signed": true,
-      "rolling": false,
-      "renew": false
-    },
-    "sessionUseModel": true
-  },
-  "cuks": {
-    "model": {
-      "connector": {
-        "default": {
-          "dab": "@rappopo/dab-memory",
-          "opts": {}
-        }
-      }
+    "defaultMiddleware": "",
+    "flash": {
+      "key": "flash"
     }
   }
 }
