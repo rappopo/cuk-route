@@ -4,9 +4,11 @@ module.exports = function(cuk) {
   const { _, helper } = cuk.pkg.core.lib
 
   return (name, ctx = {}, opts = {}) => {
-    const [pkgId, routeName, pkg] = helper('core:pkgSplitToken')(name, 'Invalid route name (%s)')
+    if (name.substr(0, 1) === '/' || name.substr(0, 7) === 'http://' || name.substr(0, 8) === 'https://')
+      return name
+    const [pkgId, routeName, pkg] = helper('core:pkgTokenSplit')(name, 'Invalid route name (%s)')
     const router = _.get(cuk.pkg, pkgId + '.cuks.router')
-    if (!router) throw helper('core:makeError')('Package doesn\\t have a router')
+    if (!router) throw helper('core:makeError')("Package doesn't have a router")
     let params = opts.params || {}
     if (ctx.i18n) {
       const cfg = cuk.pkg.i18n.cfg.common
