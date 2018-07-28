@@ -26,7 +26,7 @@ module.exports = function(cuk){
         let opt = opts.pkg.cfg.common.mount === '/' ? null : { prefix: opts.pkg.cfg.common.mount }
         let router = new Router(opt)
         router.pkgId = opts.pkg.id
-        _.set(opts.pkg.cuks, 'router', router)
+        _.set(opts.pkg.cuks, 'route.router', router)
         app.use(helper('http:composeMiddleware')(_.get(pkg.cfg, 'cuks.http.middleware', []), `${pkgId}:${opts.pkg.id}`, true))
         _.each(opts.files, f => {
           makeRoute(f, opts.pkg, pkg, router, opts.dir)

@@ -6,9 +6,6 @@ module.exports = function(cuk) {
   return (name, ctx = {}, opts = {}) => {
     if (name.substr(0, 1) === '/' || name.substr(0, 7) === 'http://' || name.substr(0, 8) === 'https://')
       return name
-    const [pkgId, routeName, pkg] = helper('core:pkgTokenSplit')(name, 'Invalid route name (%s)')
-    const router = _.get(cuk.pkg, pkgId + '.cuks.router')
-    if (!router) throw helper('core:makeError')("Package doesn't have a router")
     let params = opts.params || {}
     if (ctx.i18n) {
       const cfg = cuk.pkg.i18n.cfg.common
@@ -17,6 +14,8 @@ module.exports = function(cuk) {
         p[cfg.detector.fieldName] = ctx.session[cfg.detector.fieldName]
       if (!_.isEmpty(p)) params = helper('core:merge')(params, p)
     }
-    return router.url(routeName, params, opts.opts)
+    const router = helper('route:getRouter')(name)
+    const url = router.url(name, params, opts.opts)
+    return url
   }
 }
