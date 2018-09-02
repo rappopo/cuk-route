@@ -1,115 +1,26 @@
-## @rappopo/cuk-route
+# @rappopo/cuk-route
 
-### Route File
+[![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://paypal.me/ardhilukianto)
 
-1. Raw body content
+> Please do not send pull request for now, API isn't stable yet! Any pull requests will be ignored & silently rejected!!
 
-```javascript
-module.exports = function (cuk) {
-  return '<p>Your content here...</p>'
-}
+## Setup
+
+Invoke this command in your CUK project directory:
+
+```
+$ npm install --save @rappopo/cuk-route
 ```
 
-2. View content
-
-```javascript
-module.exports = function (cuk) {
-  return 'view:app:/my/view'
-}
-```
-
-3. One and only route object
-
-```javascript
-module.exports = function (cuk) {
-  ...
-  return {
-    method: 'GET',
-    middleware: 'app:routeMiddleware',
-    path: '/my/custom/route/path',
-    param: {
-      routeParam: (routeParam, ctx, next) => {
-        ...
-        return next()
-      }
-      ...
-    },
-    handler: async (ctx, next) => {
-      ...
-      ctx.render('app:/my/view')
-    }
-  }
-}
-```
-
-4. Array of many route objects
-
-```javascript
-module.exports = function (cuk) {
-  ...
-  return [{
-    method: 'GET',
-    middleware: 'app:routeMiddleware',
-    path: '/my/custom/route/path',
-    param: {
-      routeParam: (routeParam, ctx, next) => {
-        ...
-        return next()
-      }
-      ...
-    },
-    handler: async (ctx, next) => {
-      ...
-      ctx.render('app:/my/view')
-    }
-  }, {
-    ...
-  }]
-}
-```
-
-5. Complete with global options
-
-```javascript
-module.exports = function (cuk) {
-  ...
-  return {
-    middleware: 'app:globalMiddleware',
-    param: {
-      globalParam: (globalParam, ctx, next) => {
-        ...
-        return next()
-      },
-      ...
-    },
-    route: [
-      {
-        method: 'GET',
-        middleware: 'app:routeMiddleware',
-        path: '/my/custom/route/path',
-        param: {
-          routeParam: (routeParam, ctx, next) => {
-            ...
-            return next()
-          }
-          ...
-        },
-        handler: async (ctx, next) => {
-          ...
-          ctx.render('app:/my/view')
-        }
-      },
-      ...
-    ]
-  }
-}
-```
 
 ## Links
 
-* [Documentation](https://docs.rappopo.com/cuk-route/)
+* [Documentation](https://docs.rappopo.com/cuk/)
 * [Changelog](CHANGELOG.md)
-* Donation: Bitcoin **16HVCkdaNMvw3YdBYGHbtt3K5bmpRmH74Y**
+
+## Donation
+* [![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://paypal.me/ardhilukianto)
+* Bitcoin **16HVCkdaNMvw3YdBYGHbtt3K5bmpRmH74Y**
 
 ## License
 
