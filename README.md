@@ -5,7 +5,7 @@
 1. Raw body content
 
 ```javascript
-module.exports = function(cuk) {
+module.exports = function (cuk) {
   return '<p>Your content here...</p>'
 }
 ```
@@ -13,7 +13,7 @@ module.exports = function(cuk) {
 2. View content
 
 ```javascript
-module.exports = function(cuk) {
+module.exports = function (cuk) {
   return 'view:app:/my/view'
 }
 ```
@@ -21,7 +21,7 @@ module.exports = function(cuk) {
 3. One and only route object
 
 ```javascript
-module.exports = function(cuk) {
+module.exports = function (cuk) {
   ...
   return {
     method: 'GET',
@@ -45,7 +45,7 @@ module.exports = function(cuk) {
 4. Array of many route objects
 
 ```javascript
-module.exports = function(cuk) {
+module.exports = function (cuk) {
   ...
   return [{
     method: 'GET',
@@ -71,7 +71,7 @@ module.exports = function(cuk) {
 5. Complete with global options
 
 ```javascript
-module.exports = function(cuk) {
+module.exports = function (cuk) {
   ...
   return {
     middleware: 'app:globalMiddleware',

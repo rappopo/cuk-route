@@ -1,6 +1,6 @@
 'use script'
 
-module.exports = function(cuk) {
+module.exports = function (cuk) {
   const { helper } = cuk.pkg.core.lib
 
   return (url, err, ctx) => {

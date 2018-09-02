@@ -1,6 +1,6 @@
 'use strict'
 
-module.exports = function(cuk){
+module.exports = function (cuk){
   let pkgId = 'route',
     pkg = cuk.pkg[pkgId]
   const { _, helper, path, fs, globby } = cuk.pkg.core.lib
