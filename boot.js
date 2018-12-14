@@ -10,7 +10,7 @@ module.exports = function (cuk){
 
   return new Promise((resolve, reject) => {
     let defMw = ['http:responseTime'],
-      cfgMw = _.get(pkg.cfg, 'common.defaultMiddleware')
+      cfgMw = _.get(pkg.cfg, 'defaultMiddleware')
     if (_.isArray(cfgMw))
       defMw = _.concat(defMw, cfgMw)
     else if (_.isString(cfgMw) && !_.isEmpty(cfgMw))
@@ -23,7 +23,7 @@ module.exports = function (cuk){
       pkgId: pkgId,
       name: '',
       parentAction: opts => {
-        let opt = opts.pkg.cfg.common.mount === '/' ? null : { prefix: opts.pkg.cfg.common.mount }
+        let opt = opts.pkg.cfg.mount === '/' ? null : { prefix: opts.pkg.cfg.mount }
         let router = new Router(opt)
         router.pkgId = opts.pkg.id
         _.set(opts.pkg.cuks, 'route.router', router)

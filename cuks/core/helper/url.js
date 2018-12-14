@@ -8,7 +8,7 @@ module.exports = function (cuk) {
       return name
     let params = opts.params || {}
     if (ctx.i18n) {
-      const cfg = cuk.pkg.i18n.cfg.common
+      const cfg = cuk.pkg.i18n.cfg
       let p = {}
       if (cfg.detector.method.indexOf('path') > -1)
         p[cfg.detector.fieldName] = ctx.session[cfg.detector.fieldName]
